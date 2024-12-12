@@ -1,0 +1,18 @@
+[Unit]
+Description=Send CPU Temperature to Webserver and Notify on Failure
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/simplefancontroller.sh
+Restart=always
+RestartSec=10
+User=root
+Environment=WEBHOOK_URL=http://dein-webserver.com/api/temperature
+Environment=DEVICE_NAME=DeviceName
+Environment=NOTIFY_EMAIL=admin@example.com
+Environment=SMTP_SERVER=smtp.example.com
+Environment=SMTP_USER=user@example.com
+Environment=SMTP_PASSWORD=password
+
+[Install]
+WantedBy=multi-user.target
