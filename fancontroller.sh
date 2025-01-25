@@ -9,13 +9,6 @@ get_cpu_temp() {
   fi
 }
 
-send_email_notification() {
-  local subject=$1
-  local body=$2
-
-  echo -e "Subject: $subject\n\n$body" | msmtp --host=$SMTP_SERVER --auth=on --user=$SMTP_USER --passwordeval="echo $SMTP_PASSWORD" $NOTIFY_EMAIL
-}
-
 send_temperature() {
   local retries=0
   TEMP=$(get_cpu_temp)
@@ -46,11 +39,6 @@ EOF
   done
 
   echo "$(date): Max. Anzahl von Versuchen erreicht. Daten nicht gesendet." >> $LOG_FILE
-
-  send_email_notification \
-    "Warnung: Temperatur konnte nicht gesendet werden" \
-    "Die CPU-Temperatur konnte nicht an den Webserver gesendet werden.\n\nLetzte bekannte Temperatur: $TEMP°C\nGerät: $DEVICE_NAME\nZeit: $TIMESTAMP\nLog-Datei: $LOG_FILE"
-
   return 1
 }
 
