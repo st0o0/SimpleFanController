@@ -30,16 +30,16 @@ EOF
       -d "$JSON_PAYLOAD" "$WEBHOOK_URL")
 
     if [ "$HTTP_RESPONSE" -eq 200 ]; then
-      echo "$(date): Daten erfolgreich gesendet. Temp: $TEMP°C" >> $LOG_FILE
+      echo "$(date): Daten erfolgreich gesendet. Temp: $TEMP°C"
       return 0
     else
-      echo "$(date): Fehler beim Senden (Status: $HTTP_RESPONSE). Versuch $((retries + 1))/$MAX_RETRIES." >> $LOG_FILE
+      echo "$(date): Fehler beim Senden (Status: $HTTP_RESPONSE). Versuch $((retries + 1))/$MAX_RETRIES."
       retries=$((retries + 1))
       sleep $RETRY_DELAY
     fi
   done
 
-  echo "$(date): Max. Anzahl von Versuchen erreicht. Daten nicht gesendet." >> $LOG_FILE
+  echo "$(date): Max. Anzahl von Versuchen erreicht. Daten nicht gesendet."
   return 1
 }
 
