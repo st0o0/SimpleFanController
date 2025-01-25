@@ -10,7 +10,8 @@ get_cpu_temp() {
 }
 
 send_temperature() {
-  local retries=0
+  local retries
+  retries=0
   TEMP=$(get_cpu_temp)
   TIMESTAMP=$(date +"%Y-%m-%dT%H:%M:%S")
 
