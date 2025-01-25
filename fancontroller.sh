@@ -49,5 +49,5 @@ EOF
 
 while true; do
   send_temperature
-  sleep 60
+  sleep 180
 done
