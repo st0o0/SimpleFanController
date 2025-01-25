@@ -26,8 +26,12 @@ EOF
 
   while [ $retries -lt $MAX_RETRIES ]; do
     HTTP_RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
-      -X POST -H "Content-Type: application/json" \
-      -d "$JSON_PAYLOAD" "$WEBHOOK_URL")
+      -X POST \
+      -H "Content-Type: application/x-www-form-urlencoded" \
+      --data-urlencode "device=$DEVICE_NAME" \
+      --data-urlencode "temperature=$TEMP" \
+      --data-urlencode "timestamp=$TIMESTAMP" \
+      "$WEBHOOK_URL")
 
     if [ "$HTTP_RESPONSE" -eq 200 ]; then
       echo "$(date): Daten erfolgreich gesendet. Temp: $TEMP°C"
