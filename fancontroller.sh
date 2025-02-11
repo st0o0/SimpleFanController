@@ -34,7 +34,7 @@ EOF
       --data "timestamp=$TIMESTAMP" \
       "$WEBHOOK_URL")
 
-    if [ "$HTTP_RESPONSE" -eq 200 ]; then
+    if [ "$HTTP_RESPONSE" -eq 202 ]; then
       echo "$(date): Daten erfolgreich gesendet. Temp: $TEMP°C"
       return 0
     else
