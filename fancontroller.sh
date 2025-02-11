@@ -28,6 +28,7 @@ EOF
     HTTP_RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
       -X POST \
       -H "Content-Type: application/x-www-form-urlencoded" \
+      -H "User-Agent: insomnia/10.3.0" \
       --data "device=$DEVICE_NAME" \
       --data "temperature=$TEMP" \
       --data "timestamp=$TIMESTAMP" \
